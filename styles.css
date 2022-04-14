@@ -21,6 +21,8 @@ img{
     width: 130px;
     height: 92px;
 }
+
+
 .login-screen{
     width: 100%;
     height: 100%;
@@ -31,8 +33,9 @@ img{
     justify-content: center;
     position: fixed;
     z-index: 2;
-    
+    top: 0;
 }
+
 .login-container{
     height: 114px;
     display: flex;
@@ -44,13 +47,14 @@ img{
     margin-top: 19%;
     margin-bottom: 44.3%;
 }
-.user-imput{
+.user-input{
     width: 261px;
     height: 54px;
     background-color: #ffffff;
     border: 1px solid #d7d7d7;
     border-radius: 4px;
     color: #aeaeae;
+    outline: none;
 }
 button{
     width: 109px;
@@ -60,10 +64,11 @@ button{
     color: #696969;
     border: none;
 }
-.user-imput, button{
+.user-input, button{
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 .container-top{ 
     height: 80px;
@@ -79,7 +84,6 @@ button{
     display: flex;
     position: fixed;
     z-index: 2;
-    display: none;
 }
 .right-side{
     width: 66.67%;
@@ -137,4 +141,7 @@ footer{
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+}
+.hidden{
+    display: none;
 }
