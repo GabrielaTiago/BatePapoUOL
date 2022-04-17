@@ -18,11 +18,11 @@
     <header>
         <div class="container-top">
             <img src="images/logo 1.png" alt="bate papo UOL">
-            <ion-icon name="people"></ion-icon>
+            <ion-icon name="people" onclick="sidebarOn()"></ion-icon>
         </div>
     </header>
-        <div class="sidebar">
-            <div class="empty"></div>
+        <div class="sidebar hidden">
+            <div class="empty" onclick="sidebarOff()"></div>
             <div class="right-side">
                 <div class="contacts-top"><h4>Escolha um contato para enviar mensagem:</h4></div>
                 <div class="contacts">
@@ -65,11 +65,10 @@
     <footer>
         <div class="container-bottom">
             <div class="messages">
-                <div class="initial-message">Escreva aqui...</div>
-                <div class="user-message"></div>
-                <div class="information-massage"></div>
-            </div>
-                
+                <input class="initial-message" placeholder="Escreva aqui..." />
+                <div class="user-message"><p></p></div>
+                <div class="information-message"></div>
+            </div>              
             <ion-icon name="paper-plane-outline"></ion-icon>
         </div>
     </footer>

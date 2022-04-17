@@ -1,3 +1,7 @@
+*{
+    box-sizing: border-box;
+    cursor: pointer;
+}
 body{
     font-family: 'Roboto', sans-serif;
     background-color: #e5e5e5;
@@ -21,8 +25,6 @@ img{
     width: 130px;
     height: 92px;
 }
-
-
 .login-screen{
     width: 100%;
     height: 100%;
@@ -35,7 +37,6 @@ img{
     z-index: 2;
     top: 0;
 }
-
 .login-container{
     height: 114px;
     display: flex;
@@ -92,7 +93,6 @@ button{
     font-size: 16px;
     color: #000000;
     right: 0;
-
 }
 .empty{
     width: 33.33%;
@@ -141,6 +141,11 @@ footer{
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+}
+.initial-message{
+    outline: none;
+    border: none;
+    width: 100%;
 }
 .hidden{
     display: none;
