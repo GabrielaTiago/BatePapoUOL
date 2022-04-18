@@ -68,6 +68,7 @@ function getMessages(){
                     break;
 
                 case "private_message":
+                    if(response.data[i].from === nameUser || response.data[i].to === nameUser)
                     divMessages.innerHTML += `
                     <div class="private-message">
                         <div class="display-message">
@@ -77,11 +78,14 @@ function getMessages(){
                     </div>`;
                     break;
             }
+      //      scrollMessages();
         }
     });
-    reloadMessages()
+    reloadMessages();
 }
-
+function scrollMessages(){
+    document.querySelector(".container-messages").lastElementChild.scrollIntoView();
+}
 function sidebarOn(){
     click = document.querySelector(".sidebar");
     if(click !== null){
