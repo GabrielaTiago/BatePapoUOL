@@ -35,7 +35,7 @@ function reloadMessages(){
 }
 
 function keepConected(){
-    axios.post("https://mock-api.driven.com.br/api/v6/uol/status", {name: nameUser})
+    let promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/status", {name: nameUser});
 }
 
 function getMessages(){
@@ -78,13 +78,23 @@ function getMessages(){
                     </div>`;
                     break;
             }
-      //      scrollMessages();
+            scrollMessages();
         }
     });
     reloadMessages();
 }
 function scrollMessages(){
     document.querySelector(".container-messages").lastElementChild.scrollIntoView();
+}
+
+function sendMessages(){
+    userMessage = document.querySelector(".initial-message").value;
+    console.log(userMessage);
+
+    let promise = axios.post("", {from: nameUser, to: "Todos", text: userMessage, type: "message"})
+
+    promise.then("OK!");
+    promise.catch(promise.catch(() => window.location.reload()));
 }
 function sidebarOn(){
     click = document.querySelector(".sidebar");
