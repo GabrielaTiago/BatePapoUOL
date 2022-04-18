@@ -91,7 +91,7 @@ function sendMessages(){
     userMessage = document.querySelector(".initial-message").value;
     console.log(userMessage);
 
-    let promise = axios.post("", {from: nameUser, to: "Todos", text: userMessage, type: "message"})
+    let promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", {from: nameUser, to: "Todos", text: userMessage, type: "message"})
 
     promise.then("OK!");
     promise.catch(promise.catch(() => window.location.reload()));
