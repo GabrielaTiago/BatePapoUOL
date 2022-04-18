@@ -5,7 +5,7 @@ let nameUser;
 
 getMessages();
 
-function login (){
+function login(){
     nameUser = document.querySelector(".user-input").value;
     
     let promise = axios.post(participantsUrl, {name: nameUser});
@@ -19,14 +19,23 @@ function login (){
 
 function userAllowed(){
     document.querySelector(".login-screen").classList.add("hidden");
+    reloadMessages();
 }
 
 function showErrors(erro){ 
     let errorValue = erro.response.status;
     
     if(nameUser === "" && errorValue == 400) alert(`Erro ${errorValue}! Campo em branco, digite seu usuário`);
-    
     else if (errorValue == 400) alert(`Erro ${errorValue}! Este usuário já existe, digite seu usuário novamente`);
+}
+
+function reloadMessages(){
+    setInterval(getMessages, 3000);
+    setInterval(keepConected, 5000);
+}
+
+function keepConected(){
+    axios.post("https://mock-api.driven.com.br/api/v6/uol/status", {name: nameUser})
 }
 
 function getMessages(){
@@ -70,6 +79,7 @@ function getMessages(){
             }
         }
     });
+    reloadMessages()
 }
 
 function sidebarOn(){
