@@ -4,7 +4,7 @@
 }
 body{
     font-family: 'Roboto', sans-serif;
-    background-color: #e5e5e5;
+    background-color: #F3F3F3;
 }
 header{
     background-color: #ffffff; 
@@ -78,6 +78,42 @@ button{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.container-messages{
+    width: 100%;
+    height: 100%;
+    margin-top: 106px;
+}
+.display-message{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    font-size: 14px;
+    margin: 0 9px 0 8px;
+}
+.status-message, .comum-message, .private-message{
+    margin-bottom: 4px;
+}
+.time{
+    color: #AAAAAA;
+    margin-right: 4px;
+}
+.status-message{
+    background-color: #dcdcdc;
+}
+.comum-message{
+    background-color: #FFFFFF;
+}
+.private-message{
+    background-color:  #FFDEDE;
+}
+strong{
+    font-weight: 700;
+}
+p{
+    width: 100%;
+    word-wrap: break-word;
 }
 .sidebar{
     width: 100%;
