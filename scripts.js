@@ -3,7 +3,6 @@ const messagesUrl = "https://mock-api.driven.com.br/api/v6/uol/messages";
 
 let nameUser;
 
-getMessages();
 
 function login(){
     nameUser = document.querySelector(".user-input").value;
@@ -30,6 +29,7 @@ function showErrors(erro){
 }
 
 function reloadMessages(){
+    getMessages();
     setInterval(getMessages, 3000);
     setInterval(keepConected, 5000);
 }
@@ -81,8 +81,8 @@ function getMessages(){
             scrollMessages();
         }
     });
-    reloadMessages();
 }
+
 function scrollMessages(){
     document.querySelector(".container-messages").lastElementChild.scrollIntoView();
 }
@@ -93,9 +93,12 @@ function sendMessages(){
 
     let promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", {from: nameUser, to: "Todos", text: userMessage, type: "message"})
 
-    promise.then("OK!");
-    promise.catch(promise.catch(() => window.location.reload()));
+    promise.then(response => console.log(response.status));
+    promise.catch(() => window.location.reload());
+
+    userMessage = "";
 }
+
 function sidebarOn(){
     click = document.querySelector(".sidebar");
     if(click !== null){
