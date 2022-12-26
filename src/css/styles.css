@@ -181,26 +181,43 @@ input:focus::-webkit-input-placeholder {
   width: 20.31px;
   margin-right: 9px;
 }
-footer {
-  background-color: #ffffff;
-  width: 100%;
+.footer {
+  width: 100vw;
+  height: 80px;
+  padding: 0 17px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
   position: fixed;
   bottom: 0px;
   left: 0px;
-}
-.container-bottom {
-  height: 80px;
-  margin: 0px 17px 0px 27px;
   box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
+  background-color: var(--color-white);
 }
-.initial-message {
+.send-message-container {
+  width: calc(100% - 26px);
+}
+.send-message-input {
+  width: 100%;
+  font-size: 18px;
+  font-style: italic;
+  line-height: 21px;
   outline: none;
   border: none;
-  width: 100%;
+}
+.send-message-input::placeholder {
+  color: var(--color-black);
+}
+.send-private-message {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 25px;
+  color: var(--color-text-sending-msg);
+}
+.send-message-icon {
+  width: 26px;
+  height: 26px;
 }
 .hidden {
   display: none;

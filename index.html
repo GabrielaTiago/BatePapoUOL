@@ -82,18 +82,16 @@
       </div>
       <div class="container-messages"></div>
     </main>
-    <footer>
-      <div class="container-bottom">
-        <div class="send-messages">
-          <input class="initial-message" placeholder="Escreva aqui..." />
-          <div class="user-message"><p></p></div>
-          <div class="information-message"></div>
-        </div>
-        <ion-icon
-          name="paper-plane-outline"
-          onclick="sendMessages()"
-        ></ion-icon>
+    <footer class="footer">
+      <div class="send-message-container">
+        <input class="send-message-input" placeholder="Escreva aqui..." />
+        <div class="send-private-message"></div>
       </div>
+      <ion-icon
+        class="send-message-icon"
+        name="paper-plane-outline"
+        onclick="sendMessages()"
+      ></ion-icon>
     </footer>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
