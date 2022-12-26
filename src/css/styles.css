@@ -94,42 +94,42 @@ input:focus::-webkit-input-placeholder {
 }
 .container-messages {
   width: 100%;
-  height: auto;
-  margin-top: 106px;
-  margin-bottom: 80px;
+  height: 100%;
+  padding: 106px 0 90px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 .display-message {
   width: 100%;
+  min-height: 40px;
+  padding: 5px 9px;
   display: flex;
   align-items: center;
-  min-height: 40px;
+  border-radius: 2px;
   font-size: 14px;
-  margin: 0 9px 0 8px;
-}
-.status-message,
-.comum-message,
-.private-message {
-  margin-bottom: 4px;
+  line-height: 20px;
 }
 .time {
-  color: #aaaaaa;
+  color: var(--color-text-time);
   margin-right: 4px;
 }
 .status-message {
-  background-color: #dcdcdc;
+  background-color: var(--color-status-msg);
 }
-.comum-message {
+.regular-message {
   background-color: #ffffff;
 }
 .private-message {
   background-color: #ffdede;
 }
-strong {
+.bold-text {
   font-weight: 700;
 }
-p {
+.message {
   width: 100%;
   word-wrap: break-word;
+  hyphens: auto;
 }
 .sidebar {
   width: 100%;
