@@ -5,7 +5,7 @@ let nameUser;
 
 
 function login(){
-    nameUser = document.querySelector(".user-input").value;
+    nameUser = document.querySelector(".login-input").value;
     
     let promise = axios.post(participantsUrl, {name: nameUser});
     
