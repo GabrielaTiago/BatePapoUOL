@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-    <meta charset="UTF-8" / />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" / />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" / />
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="icon" type="image/icon" href="https://seeklogo.com//images/U/uol-logo-68F369E089-seeklogo.com.png" />
+    <link
+      rel="icon"
+      type="image/icon"
+      href="https://seeklogo.com//images/U/uol-logo-68F369E089-seeklogo.com.png"
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,17 +17,15 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet"
     />
-    
+
     <link rel="stylesheet" href="src/css/reset.css" />
     <link rel="stylesheet" href="src/css/styles.css" />
     <title>Chat UOL</title>
   </head>
   <body>
     <header>
-      <div class="container-top">
-        <img src="src/assets/images/chatuol.png" alt="bate papo UOL" />
-        <ion-icon name="people" onclick="sidebarOn()"></ion-icon>
-      </div>
+      <img src="src/assets/images/chatuol.png" alt="bate papo UOL" />
+      <ion-icon name="people" onclick="sidebarOn()"></ion-icon>
     </header>
     <div class="sidebar hidden">
       <div class="empty" onclick="sidebarOff()"></div>
@@ -93,7 +95,11 @@
     </div>
     <main>
       <div class="login-screen">
-        <img class="login-image" src="src/assets/images/chatuol.png" alt="logo chat uol" />
+        <img
+          class="login-image"
+          src="src/assets/images/chatuol.png"
+          alt="logo chat uol"
+        />
         <div class="login-container">
           <input class="user-input" placeholder="Digite seu nome" />
           <button onclick="login()">Entrar</button>
@@ -130,4 +136,3 @@
     <script src="src/scripts/script.js"></script>
   </body>
 </html>
-
