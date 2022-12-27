@@ -7,24 +7,23 @@ function login() {
 
   let promise = axios.post(`${BASE_API_URL}/participants`, { name: userName });
 
-  promise.then(userAllowed);
-  promise.catch(showErrors);
+  promise.then(logsTheUserIn);
+  promise.catch(throwErrors);
 }
 
-function userAllowed() {
+function logsTheUserIn() {
   document.querySelector(".login-screen").classList.add("hidden");
   reloadMessages();
 }
 
-function showErrors(erro) {
-  let errorValue = erro.response.status;
+function throwErrors(err) {
+  let error = err.response.status;
 
-  if (userName === "" && errorValue == 400)
-    alert(`Erro ${errorValue}! Campo em branco, digite seu usuário`);
-  else if (errorValue == 400)
-    alert(
-      `Erro ${errorValue}! Este usuário já existe, digite seu usuário novamente`
-    );
+  if (userName === "" && error === 400) {
+    alert(`Erro ${error}! Campo em branco, digite seu usuário`);
+  } else if (error === 400) {
+    alert(`Erro ${error}! Este usuário já existe, digite um novo nome`);
+  }
 }
 
 function reloadMessages() {
