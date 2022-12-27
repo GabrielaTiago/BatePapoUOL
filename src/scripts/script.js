@@ -55,6 +55,7 @@ function getMessages() {
 
   promise.then((res) => {
     createsTheMessages(res.data);
+    scrollMessages();
   });
   promise.catch((err) => {
     const { status, data } = err.response;
@@ -113,7 +114,6 @@ function createsTheMessages(allMessages) {
         }
         break;
     }
-    scrollMessages();
   });
 }
 
@@ -133,7 +133,10 @@ function sendMessages() {
     type: "message",
   });
 
-  promise.then((response) => console.log(response.status));
+  promise.then((response) => {
+    scrollMessages();
+    console.log(response.status);
+  });
   promise.catch(() => window.location.reload());
 
   userMessage = "";
