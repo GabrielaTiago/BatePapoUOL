@@ -1,19 +1,14 @@
-const participantsUrl =
-  "https://mock-api.driven.com.br/api/v6/uol/participants";
-const messagesUrl = "https://mock-api.driven.com.br/api/v6/uol/messages";
+const BASE_API_URL = "https://mock-api.driven.com.br/api/v6/uol";
 
-let nameUser;
+let userName;
 
 function login() {
-  nameUser = document.querySelector(".login-input").value;
+  userName = document.querySelector(".login-input").value;
 
-  let promise = axios.post(participantsUrl, { name: nameUser });
+  let promise = axios.post(`${BASE_API_URL}/participants`, { name: userName });
 
   promise.then(userAllowed);
   promise.catch(showErrors);
-
-  console.log(nameUser);
-  console.log(promise);
 }
 
 function userAllowed() {
@@ -24,7 +19,7 @@ function userAllowed() {
 function showErrors(erro) {
   let errorValue = erro.response.status;
 
-  if (nameUser === "" && errorValue == 400)
+  if (userName === "" && errorValue == 400)
     alert(`Erro ${errorValue}! Campo em branco, digite seu usuário`);
   else if (errorValue == 400)
     alert(
@@ -39,15 +34,13 @@ function reloadMessages() {
 }
 
 function keepConected() {
-  let promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/status", {
-    name: nameUser,
+  let promise = axios.post(`${BASE_API_URL}/status`, {
+    name: userName,
   });
 }
 
 function getMessages() {
-  const promise = axios.get(
-    "https://mock-api.driven.com.br/api/v6/uol/messages"
-  );
+  const promise = axios.get(`${BASE_API_URL}/messages`);
   promise.then(function (response) {
     let divMessages = document.querySelector(".container-messages");
     divMessages.innerHTML = "";
@@ -89,8 +82,8 @@ function getMessages() {
 
         case "private_message":
           if (
-            response.data[i].from === nameUser ||
-            response.data[i].to === nameUser
+            response.data[i].from === userName ||
+            response.data[i].to === userName
           )
             divMessages.innerHTML += `
               <div class="private-message">
@@ -118,13 +111,14 @@ function scrollMessages() {
 }
 
 function sendMessages() {
-  userMessage = document.querySelector(".initial-message").value;
-  console.log(userMessage);
+  let userMessage = document.querySelector(".send-message-input").value;
 
-  let promise = axios.post(
-    "https://mock-api.driven.com.br/api/v6/uol/messages",
-    { from: nameUser, to: "Todos", text: userMessage, type: "message" }
-  );
+  let promise = axios.post(`${BASE_API_URL}/messages`, {
+    from: userName,
+    to: "Todos",
+    text: userMessage,
+    type: "message",
+  });
 
   promise.then((response) => console.log(response.status));
   promise.catch(() => window.location.reload());
