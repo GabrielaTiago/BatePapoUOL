@@ -52,66 +52,68 @@ function keepConnected() {
 
 function getMessages() {
   const promise = axios.get(`${BASE_API_URL}/messages`);
-  promise.then(function (response) {
-    let divMessages = document.querySelector(".container-messages");
-    divMessages.innerHTML = "";
 
-    for (let i = 0; i < response.data.length; i++) {
-      switch (response.data[i].type) {
-        case "status":
+  promise.then((res) => {
+    createsTheMessages(res.data);
+  });
+  promise.catch((err) => {
+    const { status, data } = err.response;
+    alert(`${data} Erro ${status} - Problema ao carregar as mensagens do chat`);
+    window.location.reload();
+  });
+}
+
+function createsTheMessages(allMessages) {
+  let divMessages = document.querySelector(".container-messages");
+
+  allMessages.forEach((message) => {
+    const { from, time, text, to, type } = message;
+
+    switch (type) {
+      case "status":
+        divMessages.innerHTML += `
+          <li class="display-message status-message">
+            <span class="message">
+              <span class="time">(${time})</span>
+              <span class="users"><b class="bold-text">${from}</b></span>
+              <span class="text">${text}</span>
+            </span>
+          </li>
+        `;
+        break;
+
+      case "message":
+        divMessages.innerHTML += `
+          <li class="display-message regular-message">
+            <span class="message">
+              <span class="time">(${time})</span>
+              <span class="users">
+                <b class="bold-text">${from}</b> para <b class="bold-text">${to}</b>:
+              </span>
+              <span class="text"> ${text}</span>
+            </span>
+          </li>
+        `;
+        break;
+
+      case "private_message":
+        if (from === userName || to === userName) {
           divMessages.innerHTML += `
-            <div class="status-message">
-              <div class="display-message">
-                <p class="message">
-                  <span class="time">(${response.data[i].time})</span>
-                  <span class="message">
-                    <b class="bold-text">${response.data[i].from}</b>
-                    ${response.data[i].text}
-                  </span>
-                </p>
-              </div>
-            </div>
+            <li class="display-message private-message">
+              <span class="message">
+                <span class="time">(${time})</span>
+                <span class="users">
+                  <b class="bold-text">${from}</b> reservadamente para 
+                  <b class="bold-text">${to}</b>:
+                </span>
+                <span class="text"> ${text}</span>
+              </span>
+            </li>
           `;
-          break;
-
-        case "message":
-          divMessages.innerHTML += `
-            <div class="regular-message">
-              <div class="display-message">
-                <p class="message">
-                <span class="time">(${response.data[i].time})</span>
-                <span class="message">
-                  <b class="bold-text">${response.data[i].from}</b>
-                  para
-                  <b class="bold-text">${response.data[i].to}</b>:
-                    ${response.data[i].text}</span>
-                </p>
-              </div>
-            </div>
-          `;
-          break;
-
-        case "private_message":
-          if (
-            response.data[i].from === userName ||
-            response.data[i].to === userName
-          )
-            divMessages.innerHTML += `
-              <div class="private-message">
-                <div class="display-message">
-                  <span class="time">(${response.data[i].time})</span>
-                    <span class="message">
-                        <b class="bold-text">${response.data[i].from}</b> reservadamente
-                        para <b class="bold-text">${response.data[i].to}</b>:
-                        ${response.data[i].text}
-                    </span>
-                </div>
-              </div>
-            `;
-          break;
-      }
-      scrollMessages();
+        }
+        break;
     }
+    scrollMessages();
   });
 }
 
