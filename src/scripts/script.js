@@ -1,3 +1,5 @@
+const THREE_SECONDS = 3000;
+const FIVE_SECONDS = 5000;
 const BASE_API_URL = "https://mock-api.driven.com.br/api/v6/uol";
 
 let userName;
@@ -13,7 +15,7 @@ function login() {
 
 function logsTheUserIn() {
   document.querySelector(".login-screen").classList.add("hidden");
-  reloadMessages();
+  loadMessages();
 }
 
 function throwErrors(err) {
@@ -26,15 +28,25 @@ function throwErrors(err) {
   }
 }
 
-function reloadMessages() {
+function loadMessages() {
   getMessages();
-  setInterval(getMessages, 3000);
-  setInterval(keepConected, 5000);
+  setInterval(getMessages, THREE_SECONDS);
+  setInterval(keepConnected, FIVE_SECONDS);
 }
 
-function keepConected() {
-  let promise = axios.post(`${BASE_API_URL}/status`, {
-    name: userName,
+function keepConnected() {
+  let promise = axios.post(`${BASE_API_URL}/status`, { name: userName });
+
+  promise.then((res) => {
+    const { status, statusText } = res;
+    console.info(
+      `%c${status}, ${statusText} - Usuário continua logado`,
+      "color: blue; font-weight: bold; font-size: 15px; line-height: 25px;"
+    );
+  });
+  promise.catch((err) => {
+    const error = err.response.status;
+    alert(`Erro ${error}. Usuário desconectado por inatividade`);
   });
 }
 
