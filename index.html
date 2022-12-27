@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-    <meta charset="UTF-8" / />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" / />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" / />
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="icon" type="image/icon" href="https://seeklogo.com//images/U/uol-logo-68F369E089-seeklogo.com.png" />
+    <link
+      rel="icon"
+      type="image/icon"
+      href="https://seeklogo.com//images/U/uol-logo-68F369E089-seeklogo.com.png"
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,121 +17,98 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet"
     />
-    
+
     <link rel="stylesheet" href="src/css/reset.css" />
     <link rel="stylesheet" href="src/css/styles.css" />
     <title>Chat UOL</title>
   </head>
   <body>
-    <header>
-      <div class="container-top">
-        <img src="src/assets/images/chatuol.png" alt="bate papo UOL" />
-        <ion-icon name="people" onclick="sidebarOn()"></ion-icon>
-      </div>
+    <header class="header">
+      <img
+        class="header-logo"
+        src="src/assets/images/chatuol.png"
+        alt="bate papo UOL"
+      />
+      <ion-icon
+        class="icon-sidebar"
+        name="people"
+        onclick="sidebarOn()"
+      ></ion-icon>
     </header>
-    <div class="sidebar hidden">
-      <div class="empty" onclick="sidebarOff()"></div>
-      <div class="right-side">
-        <div class="contacts-top">
-          <h4>Escolha um contato para enviar mensagem:</h4>
-        </div>
+    <aside class="sidebar hidden">
+      <div class="left-side" onclick="sidebarOff()"></div>
+      <nav class="right-side">
         <div class="contacts">
-          <div class="users-contacts">
-            <ion-icon name="people"></ion-icon>
-            <h5>Todos</h5>
-          </div>
-          <div class="users-contacts">
-            <ion-icon name="person-circle"></ion-icon>
-            <h5>Jõao</h5>
-          </div>
-          <div class="users-contacts">
-            <ion-icon name="person-circle"></ion-icon>
-            <h5>Maria</h5>
-          </div>
+          <h4>
+            Escolha um contato <br />
+            para enviar mensagem:
+          </h4>
         </div>
+        <ul class="select-contacts">
+          <li class="users-contacts">
+            <div class="selection-container">
+              <ion-icon class="contact-icon" name="people"></ion-icon>
+              <h5>Todos</h5>
+            </div>
+            <ion-icon class="selected" name="checkmark-sharp"></ion-icon>
+          </li>
+          <li class="users-contacts">
+            <div class="selection-container">
+              <ion-icon class="contact-icon" name="person-circle"></ion-icon>
+              <h5>Jõao</h5>
+            </div>
+          </li>
+          <li class="users-contacts">
+            <div class="selection-container">
+              <ion-icon class="contact-icon" name="person-circle"></ion-icon>
+              <h5>Maria</h5>
+            </div>
+          </li>
+        </ul>
         <div class="visibility"><h4>Escolha a visibilidade:</h4></div>
-        <div class="visibility-choices">
-          <div class="public">
-            <ion-icon name="lock-open"></ion-icon>
-            <h5>Público</h5>
-          </div>
-          <div class="private">
-            <ion-icon name="lock-closed"></ion-icon>
-            <h5>Reservadamente</h5>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="sidebar hidden">
-      <div class="empty" onclick="sidebarOff()"></div>
-      <div class="right-side">
-        <div class="contacts-top">
-          <h4>Escolha um contato para enviar mensagem:</h4>
-        </div>
-        <div class="contacts">
-          <div class="users-contacts">
-            <ion-icon name="people"></ion-icon>
-            <h5>Todos</h5>
-          </div>
-          <div class="users-contacts">
-            <ion-icon name="person-circle"></ion-icon>
-            <h5>Jõao</h5>
-          </div>
-          <div class="users-contacts">
-            <ion-icon name="person-circle"></ion-icon>
-            <h5>Maria</h5>
-          </div>
-        </div>
-        <div class="visibility"><h4>Escolha a visibilidade:</h4></div>
-        <div class="visibility-choices">
-          <div class="public">
-            <ion-icon name="lock-open"></ion-icon>
-            <h5>Público</h5>
-          </div>
-          <div class="private">
-            <ion-icon name="lock-closed"></ion-icon>
-            <h5>Reservadamente</h5>
-          </div>
-        </div>
-      </div>
-    </div>
+        <ul class="select-visibility">
+          <li class="public">
+            <div class="selection-container">
+              <ion-icon class="visibility-icon" name="lock-open"></ion-icon>
+              <h5>Público</h5>
+            </div>
+          </li>
+          <li class="private">
+            <div class="selection-container">
+              <ion-icon class="visibility-icon" name="lock-closed"></ion-icon>
+              <h5>Reservadamente</h5>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </aside>
     <main>
       <div class="login-screen">
-        <img class="login-image" src="src/assets/images/chatuol.png" alt="logo chat uol" />
+        <img
+          class="login-image"
+          src="src/assets/images/chatuol.png"
+          alt="logo chat uol"
+        />
         <div class="login-container">
-          <input class="user-input" placeholder="Digite seu nome" />
-          <button onclick="login()">Entrar</button>
+          <input class="login-input" placeholder="Digite seu nome" />
+          <button class="login-button" onclick="login()">Entrar</button>
         </div>
       </div>
       <div class="container-messages"></div>
     </main>
-    <footer>
-      <div class="container-bottom">
-        <div class="send-messages">
-          <input class="initial-message" placeholder="Escreva aqui..." />
-          <div class="user-message"><p></p></div>
-          <div class="information-message"></div>
-        </div>
-        <ion-icon
-          name="paper-plane-outline"
-          onclick="sendMessages()"
-        ></ion-icon>
+    <footer class="footer">
+      <div class="send-message-container">
+        <input class="send-message-input" placeholder="Escreva aqui..." />
+        <div class="send-private-message"></div>
       </div>
-      <div class="container-bottom">
-        <div class="send-messages">
-          <input class="initial-message" placeholder="Escreva aqui..." />
-          <div class="user-message"><p></p></div>
-          <div class="information-message"></div>
-        </div>
-        <ion-icon
-          name="paper-plane-outline"
-          onclick="sendMessages()"
-        ></ion-icon>
-      </div>
+      <ion-icon
+        class="send-message-icon"
+        name="paper-plane-outline"
+        onclick="sendMessages()"
+      ></ion-icon>
     </footer>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="src/scripts/script.js"></script>
   </body>
 </html>
-
