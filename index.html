@@ -35,39 +35,53 @@
         onclick="sidebarOn()"
       ></ion-icon>
     </header>
-    <div class="sidebar hidden">
-      <div class="empty" onclick="sidebarOff()"></div>
-      <div class="right-side">
-        <div class="contacts-top">
-          <h4>Escolha um contato para enviar mensagem:</h4>
-        </div>
+    <aside class="sidebar hidden">
+      <div class="left-side" onclick="sidebarOff()"></div>
+      <nav class="right-side">
         <div class="contacts">
-          <div class="users-contacts">
-            <ion-icon name="people"></ion-icon>
-            <h5>Todos</h5>
-          </div>
-          <div class="users-contacts">
-            <ion-icon name="person-circle"></ion-icon>
-            <h5>Jõao</h5>
-          </div>
-          <div class="users-contacts">
-            <ion-icon name="person-circle"></ion-icon>
-            <h5>Maria</h5>
-          </div>
+          <h4>
+            Escolha um contato <br />
+            para enviar mensagem:
+          </h4>
         </div>
+        <ul class="select-contacts">
+          <li class="users-contacts">
+            <div class="selection-container">
+              <ion-icon class="contact-icon" name="people"></ion-icon>
+              <h5>Todos</h5>
+            </div>
+            <ion-icon class="selected" name="checkmark-sharp"></ion-icon>
+          </li>
+          <li class="users-contacts">
+            <div class="selection-container">
+              <ion-icon class="contact-icon" name="person-circle"></ion-icon>
+              <h5>Jõao</h5>
+            </div>
+          </li>
+          <li class="users-contacts">
+            <div class="selection-container">
+              <ion-icon class="contact-icon" name="person-circle"></ion-icon>
+              <h5>Maria</h5>
+            </div>
+          </li>
+        </ul>
         <div class="visibility"><h4>Escolha a visibilidade:</h4></div>
-        <div class="visibility-choices">
-          <div class="public">
-            <ion-icon name="lock-open"></ion-icon>
-            <h5>Público</h5>
-          </div>
-          <div class="private">
-            <ion-icon name="lock-closed"></ion-icon>
-            <h5>Reservadamente</h5>
-          </div>
-        </div>
-      </div>
-    </div>
+        <ul class="select-visibility">
+          <li class="public">
+            <div class="selection-container">
+              <ion-icon class="visibility-icon" name="lock-open"></ion-icon>
+              <h5>Público</h5>
+            </div>
+          </li>
+          <li class="private">
+            <div class="selection-container">
+              <ion-icon class="visibility-icon" name="lock-closed"></ion-icon>
+              <h5>Reservadamente</h5>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </aside>
     <main>
       <div class="login-screen">
         <img

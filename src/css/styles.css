@@ -132,33 +132,34 @@ input:focus::-webkit-input-placeholder {
   hyphens: auto;
 }
 .sidebar {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   position: fixed;
   z-index: 2;
 }
 .right-side {
-  width: 66.67%;
+  width: 35%;
   height: 100%;
-  background-color: #ffffff;
-  font-size: 16px;
-  color: #000000;
   right: 0;
+  background-color: var(--color-white);
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--color-black);
 }
-.empty {
-  width: 33.33%;
+.left-side {
+  width: calc(100% - 35%);
   height: 100%;
   left: 0;
   background: rgba(0, 0, 0, 0.6);
 }
-.contacts-top {
+.contacts {
   height: 84px;
 }
 .visibility {
   height: 66px;
 }
-.contacts-top,
+.contacts,
 .visibility {
   display: flex;
   align-items: center;
@@ -172,14 +173,23 @@ input:focus::-webkit-input-placeholder {
   height: 36px;
   display: flex;
   align-items: center;
-  margin-left: 15px;
+  justify-content: space-between;
+  padding: 0 15px;
 }
-.contacts {
-  height: auto;
+.selection-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.sidebar ion-icon {
-  width: 20.31px;
-  margin-right: 9px;
+.contact-icon {
+  font-size: 25px;
+}
+.visibility-icon {
+  font-size: 22px;
+}
+.selected {
+  color: var(--color-selected);
+  font-size: 25px;
 }
 .footer {
   width: 100vw;
@@ -201,13 +211,13 @@ input:focus::-webkit-input-placeholder {
 .send-message-input {
   width: 100%;
   font-size: 18px;
-  font-style: italic;
   line-height: 21px;
   outline: none;
   border: none;
 }
 .send-message-input::placeholder {
   color: var(--color-black);
+  font-style: italic;
 }
 .send-private-message {
   font-weight: 300;
@@ -221,4 +231,13 @@ input:focus::-webkit-input-placeholder {
 }
 .hidden {
   display: none;
+}
+
+@media (max-width: 700px) {
+  .right-side {
+    width: 66.67%;
+  }
+  .left-side {
+    width: calc(100% - 66.67%);
+  }
 }
