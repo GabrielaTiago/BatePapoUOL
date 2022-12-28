@@ -1,5 +1,6 @@
 const THREE_SECONDS = 3000;
 const FIVE_SECONDS = 5000;
+const TEN_SECONDS = 10000;
 const BASE_API_URL = "https://mock-api.driven.com.br/api/v6/uol";
 
 let userName;
@@ -30,8 +31,11 @@ function throwErrors(err) {
 
 function loadMessages() {
   getMessages();
+  getListOfParticipants();
+
   setInterval(getMessages, THREE_SECONDS);
   setInterval(keepConnected, FIVE_SECONDS);
+  setInterval(getListOfParticipants, TEN_SECONDS);
 }
 
 function keepConnected() {
@@ -136,10 +140,9 @@ function sendMessages() {
   promise.then((response) => {
     scrollMessages();
     console.log(response.status);
+    userMessage = "";
   });
   promise.catch(() => window.location.reload());
-
-  userMessage = "";
 }
 
 function sidebarOn() {
@@ -151,4 +154,44 @@ function sidebarOn() {
 
 function sidebarOff() {
   document.querySelector(".sidebar").classList.add("hidden");
+}
+
+function getListOfParticipants() {
+  const promise = axios.get(`${BASE_API_URL}/participants`);
+
+  promise.then((res) => {
+    renderParticipants(res.data);
+  });
+  promise.catch((err) => {
+    const { status, data } = err.response;
+    alert(
+      `${data} Erro ${status} - Problema ao carregar os paticipantes do chat`
+    );
+    window.location.reload();
+  });
+}
+
+function renderParticipants(participants) {
+  let divParticipants = document.querySelector(".select-contacts");
+  divParticipants.innerHTML = `
+    <li class="users-contacts">
+      <div class="selection-container">
+        <ion-icon class="contact-icon" name="people"></ion-icon>
+        <h5>Todos</h5>
+      </div>
+      <ion-icon class="selected" name="checkmark-sharp"></ion-icon>
+    </li>
+  `;
+
+  participants.forEach((participant) => {
+    divParticipants.innerHTML += `
+      <li class="users-contacts">
+        <div class="selection-container">
+          <ion-icon class="contact-icon" name="person-circle"></ion-icon>
+          <h5>${participant.name}</h5>
+        </div>
+        <ion-icon class="selected hidden" name="checkmark-sharp"></ion-icon>
+      </li>
+    `;
+  });
 }
