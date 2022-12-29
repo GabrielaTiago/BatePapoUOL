@@ -216,7 +216,7 @@ input:focus::-webkit-input-placeholder {
   color: var(--color-black);
   font-style: italic;
 }
-.send-private-message {
+.send-message-to {
   font-weight: 300;
   font-size: 14px;
   line-height: 25px;

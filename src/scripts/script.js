@@ -6,6 +6,7 @@ const BASE_API_URL = "https://mock-api.driven.com.br/api/v6/uol";
 let userName;
 let recipient = "Todos";
 let type = "message";
+let visability = "Público";
 
 function login() {
   userName = document.querySelector(".login-input").value;
@@ -34,6 +35,7 @@ function throwErrors(err) {
 function loadMessages() {
   getMessages();
   getListOfParticipants();
+  showsTheRecipient();
 
   setInterval(getMessages, THREE_SECONDS);
   setInterval(keepConnected, FIVE_SECONDS);
@@ -212,10 +214,12 @@ function selectRecipient(divParticipant) {
 
   divParticipant.innerHTML +=
     "<ion-icon class='selected' name='checkmark-outline'></ion-icon>";
+
+  showsTheRecipient();
 }
 
 function selectVisibility(divVisibility) {
-  let visability = divVisibility.querySelector(".to").innerHTML;
+  visability = divVisibility.querySelector(".to").innerHTML;
   const previousClick = document.querySelector(".select-visibility .selected");
 
   if (visability === "Reservadamente") type = "private_message";
@@ -223,4 +227,16 @@ function selectVisibility(divVisibility) {
 
   divVisibility.innerHTML +=
     "<ion-icon class='selected' name='checkmark-outline'></ion-icon>";
+
+  showsTheRecipient();
+}
+
+function showsTheRecipient() {
+  let divFooterRecipient = document.querySelector(".send-message-container");
+  divFooterRecipient.innerHTML = "";
+
+  divFooterRecipient.innerHTML += `
+    <input class="send-message-input" placeholder="Escreva aqui..." />
+    <div class="send-message-to">Enviando para ${recipient} (${visability})</div>
+  `;
 }
