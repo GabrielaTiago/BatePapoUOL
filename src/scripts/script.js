@@ -143,10 +143,8 @@ function sendMessages() {
 }
 
 function sidebarOn() {
-  click = document.querySelector(".sidebar");
-  if (click !== null) {
-    click.classList.remove("hidden");
-  }
+  let click = document.querySelector(".sidebar");
+  if (!!click) click.classList.remove("hidden");
 }
 
 function sidebarOff() {
