@@ -131,20 +131,29 @@ function scrollMessages() {
 
 function sendMessages() {
   let userMessage = document.querySelector(".send-message-input").value;
-
-  let promise = axios.post(`${BASE_API_URL}/messages`, {
+  const body = {
     from: userName,
-    to: "Todos",
+    to: recipient,
     text: userMessage,
-    type: "message",
-  });
+    type: type,
+  };
 
-  promise.then((response) => {
+  let promise = axios.post(`${BASE_API_URL}/messages`, body);
+
+  promise.then((res) => {
     scrollMessages();
-    console.log(response.status);
-    userMessage = "";
+    const { status, statusText } = res;
+    console.info(
+      `%c${status}, ${statusText} - Mensagem enviada`,
+      "color: yellow; font-weight: bold; font-size: 15px; line-height: 25px;"
+    );
+    document.querySelector(".send-message-input").value = "";
   });
-  promise.catch(() => window.location.reload());
+  promise.catch((err) => {
+    const { status, data } = err.response;
+    alert(`${data} Erro ${status} - Problema ao enviar sua mensagem`);
+    window.location.reload();
+  });
 }
 
 function sidebarOn() {
