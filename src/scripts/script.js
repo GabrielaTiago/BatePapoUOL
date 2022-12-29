@@ -5,6 +5,7 @@ const BASE_API_URL = "https://mock-api.driven.com.br/api/v6/uol";
 
 let userName;
 let recipient = "Todos";
+let type = "message";
 
 function login() {
   userName = document.querySelector(".login-input").value;
@@ -203,5 +204,16 @@ function selectRecipient(divParticipant) {
   if (!!previousClick) previousClick.remove();
 
   divParticipant.innerHTML +=
+    "<ion-icon class='selected' name='checkmark-outline'></ion-icon>";
+}
+
+function selectVisibility(divVisibility) {
+  let visability = divVisibility.querySelector(".to").innerHTML;
+  const previousClick = document.querySelector(".select-visibility .selected");
+
+  if (visability === "Reservadamente") type = "private_message";
+  if (!!previousClick) previousClick.remove();
+
+  divVisibility.innerHTML +=
     "<ion-icon class='selected' name='checkmark-outline'></ion-icon>";
 }
