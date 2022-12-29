@@ -4,6 +4,7 @@ const TEN_SECONDS = 10000;
 const BASE_API_URL = "https://mock-api.driven.com.br/api/v6/uol";
 
 let userName;
+let recipient = "Todos";
 
 function login() {
   userName = document.querySelector(".login-input").value;
@@ -174,24 +175,33 @@ function getListOfParticipants() {
 function renderParticipants(participants) {
   let divParticipants = document.querySelector(".select-contacts");
   divParticipants.innerHTML = `
-    <li class="users-contacts">
+    <li class="users-contacts" onclick="selectRecipient(this)">
       <div class="selection-container">
         <ion-icon class="contact-icon" name="people"></ion-icon>
-        <h5>Todos</h5>
+        <h5 class="to">Todos</h5>
       </div>
-      <ion-icon class="selected" name="checkmark-sharp"></ion-icon>
     </li>
   `;
 
   participants.forEach((participant) => {
     divParticipants.innerHTML += `
-      <li class="users-contacts">
+      <li class="users-contacts" onclick="selectRecipient(this)">
         <div class="selection-container">
           <ion-icon class="contact-icon" name="person-circle"></ion-icon>
-          <h5>${participant.name}</h5>
+          <h5 class="to">${participant.name}</h5>
         </div>
-        <ion-icon class="selected hidden" name="checkmark-sharp"></ion-icon>
       </li>
     `;
   });
+}
+
+function selectRecipient(divParticipant) {
+  recipient = divParticipant.querySelector(".to").innerHTML;
+
+  const previousClick = document.querySelector(".users-contacts .selected");
+
+  if (!!previousClick) previousClick.remove();
+
+  divParticipant.innerHTML +=
+    "<ion-icon class='selected' name='checkmark-outline'></ion-icon>";
 }
