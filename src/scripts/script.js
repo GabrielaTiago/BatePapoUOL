@@ -1,8 +1,11 @@
 const THREE_SECONDS = 3000;
 const FIVE_SECONDS = 5000;
+const TEN_SECONDS = 10000;
 const BASE_API_URL = "https://mock-api.driven.com.br/api/v6/uol";
 
 let userName;
+let recipient = "Todos";
+let type = "message";
 
 function login() {
   userName = document.querySelector(".login-input").value;
@@ -30,8 +33,11 @@ function throwErrors(err) {
 
 function loadMessages() {
   getMessages();
+  getListOfParticipants();
+
   setInterval(getMessages, THREE_SECONDS);
   setInterval(keepConnected, FIVE_SECONDS);
+  setInterval(getListOfParticipants, TEN_SECONDS);
 }
 
 function keepConnected() {
@@ -125,21 +131,29 @@ function scrollMessages() {
 
 function sendMessages() {
   let userMessage = document.querySelector(".send-message-input").value;
-
-  let promise = axios.post(`${BASE_API_URL}/messages`, {
+  const body = {
     from: userName,
-    to: "Todos",
+    to: recipient,
     text: userMessage,
-    type: "message",
-  });
+    type: type,
+  };
 
-  promise.then((response) => {
+  let promise = axios.post(`${BASE_API_URL}/messages`, body);
+
+  promise.then((res) => {
     scrollMessages();
-    console.log(response.status);
+    const { status, statusText } = res;
+    console.info(
+      `%c${status}, ${statusText} - Mensagem enviada`,
+      "color: yellow; font-weight: bold; font-size: 15px; line-height: 25px;"
+    );
+    document.querySelector(".send-message-input").value = "";
   });
-  promise.catch(() => window.location.reload());
-
-  userMessage = "";
+  promise.catch((err) => {
+    const { status, data } = err.response;
+    alert(`${data} Erro ${status} - Problema ao enviar sua mensagem`);
+    window.location.reload();
+  });
 }
 
 function sidebarOn() {
@@ -149,4 +163,64 @@ function sidebarOn() {
 
 function sidebarOff() {
   document.querySelector(".sidebar").classList.add("hidden");
+}
+
+function getListOfParticipants() {
+  const promise = axios.get(`${BASE_API_URL}/participants`);
+
+  promise.then((res) => {
+    renderParticipants(res.data);
+  });
+  promise.catch((err) => {
+    const { status, data } = err.response;
+    alert(
+      `${data} Erro ${status} - Problema ao carregar os paticipantes do chat`
+    );
+    window.location.reload();
+  });
+}
+
+function renderParticipants(participants) {
+  let divParticipants = document.querySelector(".select-contacts");
+  divParticipants.innerHTML = `
+    <li class="users-contacts" onclick="selectRecipient(this)">
+      <div class="selection-container">
+        <ion-icon class="contact-icon" name="people"></ion-icon>
+        <h5 class="to">Todos</h5>
+      </div>
+    </li>
+  `;
+
+  participants.forEach((participant) => {
+    divParticipants.innerHTML += `
+      <li class="users-contacts" onclick="selectRecipient(this)">
+        <div class="selection-container">
+          <ion-icon class="contact-icon" name="person-circle"></ion-icon>
+          <h5 class="to">${participant.name}</h5>
+        </div>
+      </li>
+    `;
+  });
+}
+
+function selectRecipient(divParticipant) {
+  recipient = divParticipant.querySelector(".to").innerHTML;
+
+  const previousClick = document.querySelector(".users-contacts .selected");
+
+  if (!!previousClick) previousClick.remove();
+
+  divParticipant.innerHTML +=
+    "<ion-icon class='selected' name='checkmark-outline'></ion-icon>";
+}
+
+function selectVisibility(divVisibility) {
+  let visability = divVisibility.querySelector(".to").innerHTML;
+  const previousClick = document.querySelector(".select-visibility .selected");
+
+  if (visability === "Reservadamente") type = "private_message";
+  if (!!previousClick) previousClick.remove();
+
+  divVisibility.innerHTML +=
+    "<ion-icon class='selected' name='checkmark-outline'></ion-icon>";
 }

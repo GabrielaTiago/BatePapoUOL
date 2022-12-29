@@ -44,39 +44,19 @@
             para enviar mensagem:
           </h4>
         </div>
-        <ul class="select-contacts">
-          <li class="users-contacts">
-            <div class="selection-container">
-              <ion-icon class="contact-icon" name="people"></ion-icon>
-              <h5>Todos</h5>
-            </div>
-            <ion-icon class="selected" name="checkmark-sharp"></ion-icon>
-          </li>
-          <li class="users-contacts">
-            <div class="selection-container">
-              <ion-icon class="contact-icon" name="person-circle"></ion-icon>
-              <h5>Jõao</h5>
-            </div>
-          </li>
-          <li class="users-contacts">
-            <div class="selection-container">
-              <ion-icon class="contact-icon" name="person-circle"></ion-icon>
-              <h5>Maria</h5>
-            </div>
-          </li>
-        </ul>
+        <ul class="select-contacts"></ul>
         <div class="visibility"><h4>Escolha a visibilidade:</h4></div>
         <ul class="select-visibility">
-          <li class="public">
+          <li class="public" onclick="selectVisibility(this)">
             <div class="selection-container">
               <ion-icon class="visibility-icon" name="lock-open"></ion-icon>
-              <h5>Público</h5>
+              <h5 class="to">Público</h5>
             </div>
           </li>
-          <li class="private">
+          <li class="private" onclick="selectVisibility(this)">
             <div class="selection-container">
               <ion-icon class="visibility-icon" name="lock-closed"></ion-icon>
-              <h5>Reservadamente</h5>
+              <h5 class="to">Reservadamente</h5>
             </div>
           </li>
         </ul>
