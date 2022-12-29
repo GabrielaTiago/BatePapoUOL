@@ -104,33 +104,30 @@ input:focus::-webkit-input-placeholder {
   width: 100%;
   min-height: 40px;
   padding: 5px 9px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  gap: 4px;
   border-radius: 2px;
   font-size: 14px;
   line-height: 20px;
+  word-wrap: break-word;
 }
 .time {
   color: var(--color-text-time);
-  margin-right: 4px;
 }
 .status-message {
   background-color: var(--color-status-msg);
 }
 .regular-message {
-  background-color: #ffffff;
+  background-color: var(--color-white);
 }
 .private-message {
-  background-color: #ffdede;
+  background-color: var(--color-private-msg);
 }
 .bold-text {
   font-weight: 700;
 }
-.message {
-  width: 100%;
-  word-wrap: break-word;
-  hyphens: auto;
-}
+
 .sidebar {
   width: 100vw;
   height: 100vh;

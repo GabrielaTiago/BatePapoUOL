@@ -1,112 +1,118 @@
-const participantsUrl =
-  "https://mock-api.driven.com.br/api/v6/uol/participants";
-const messagesUrl = "https://mock-api.driven.com.br/api/v6/uol/messages";
+const THREE_SECONDS = 3000;
+const FIVE_SECONDS = 5000;
+const BASE_API_URL = "https://mock-api.driven.com.br/api/v6/uol";
 
-let nameUser;
+let userName;
 
 function login() {
-  nameUser = document.querySelector(".login-input").value;
+  userName = document.querySelector(".login-input").value;
 
-  let promise = axios.post(participantsUrl, { name: nameUser });
+  let promise = axios.post(`${BASE_API_URL}/participants`, { name: userName });
 
-  promise.then(userAllowed);
-  promise.catch(showErrors);
-
-  console.log(nameUser);
-  console.log(promise);
+  promise.then(logsTheUserIn);
+  promise.catch(throwErrors);
 }
 
-function userAllowed() {
+function logsTheUserIn() {
   document.querySelector(".login-screen").classList.add("hidden");
-  reloadMessages();
+  loadMessages();
 }
 
-function showErrors(erro) {
-  let errorValue = erro.response.status;
+function throwErrors(err) {
+  let error = err.response.status;
 
-  if (nameUser === "" && errorValue == 400)
-    alert(`Erro ${errorValue}! Campo em branco, digite seu usuário`);
-  else if (errorValue == 400)
-    alert(
-      `Erro ${errorValue}! Este usuário já existe, digite seu usuário novamente`
-    );
+  if (userName === "" && error === 400) {
+    alert(`Erro ${error}! Campo em branco, digite seu usuário`);
+  } else if (error === 400) {
+    alert(`Erro ${error}! Este usuário já existe, digite um novo nome`);
+  }
 }
 
-function reloadMessages() {
+function loadMessages() {
   getMessages();
-  setInterval(getMessages, 3000);
-  setInterval(keepConected, 5000);
+  setInterval(getMessages, THREE_SECONDS);
+  setInterval(keepConnected, FIVE_SECONDS);
 }
 
-function keepConected() {
-  let promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/status", {
-    name: nameUser,
+function keepConnected() {
+  let promise = axios.post(`${BASE_API_URL}/status`, { name: userName });
+
+  promise.then((res) => {
+    const { status, statusText } = res;
+    console.info(
+      `%c${status}, ${statusText} - Usuário continua logado`,
+      "color: blue; font-weight: bold; font-size: 15px; line-height: 25px;"
+    );
+  });
+  promise.catch((err) => {
+    const error = err.response.status;
+    alert(`Erro ${error}. Usuário desconectado por inatividade`);
   });
 }
 
 function getMessages() {
-  const promise = axios.get(
-    "https://mock-api.driven.com.br/api/v6/uol/messages"
-  );
-  promise.then(function (response) {
-    let divMessages = document.querySelector(".container-messages");
-    divMessages.innerHTML = "";
+  const promise = axios.get(`${BASE_API_URL}/messages`);
 
-    for (let i = 0; i < response.data.length; i++) {
-      switch (response.data[i].type) {
-        case "status":
+  promise.then((res) => {
+    createsTheMessages(res.data);
+    scrollMessages();
+  });
+  promise.catch((err) => {
+    const { status, data } = err.response;
+    alert(`${data} Erro ${status} - Problema ao carregar as mensagens do chat`);
+    window.location.reload();
+  });
+}
+
+function createsTheMessages(allMessages) {
+  let divMessages = document.querySelector(".container-messages");
+
+  allMessages.forEach((message) => {
+    const { from, time, text, to, type } = message;
+
+    switch (type) {
+      case "status":
+        divMessages.innerHTML += `
+          <li class="display-message status-message">
+            <span class="message">
+              <span class="time">(${time})</span>
+              <span class="users"><b class="bold-text">${from}</b></span>
+              <span class="text">${text}</span>
+            </span>
+          </li>
+        `;
+        break;
+
+      case "message":
+        divMessages.innerHTML += `
+          <li class="display-message regular-message">
+            <span class="message">
+              <span class="time">(${time})</span>
+              <span class="users">
+                <b class="bold-text">${from}</b> para <b class="bold-text">${to}</b>:
+              </span>
+              <span class="text"> ${text}</span>
+            </span>
+          </li>
+        `;
+        break;
+
+      case "private_message":
+        if (from === userName || to === userName) {
           divMessages.innerHTML += `
-            <div class="status-message">
-              <div class="display-message">
-                <p class="message">
-                  <span class="time">(${response.data[i].time})</span>
-                  <span class="message">
-                    <b class="bold-text">${response.data[i].from}</b>
-                    ${response.data[i].text}
-                  </span>
-                </p>
-              </div>
-            </div>
+            <li class="display-message private-message">
+              <span class="message">
+                <span class="time">(${time})</span>
+                <span class="users">
+                  <b class="bold-text">${from}</b> reservadamente para 
+                  <b class="bold-text">${to}</b>:
+                </span>
+                <span class="text"> ${text}</span>
+              </span>
+            </li>
           `;
-          break;
-
-        case "message":
-          divMessages.innerHTML += `
-            <div class="regular-message">
-              <div class="display-message">
-                <p class="message">
-                <span class="time">(${response.data[i].time})</span>
-                <span class="message">
-                  <b class="bold-text">${response.data[i].from}</b>
-                  para
-                  <b class="bold-text">${response.data[i].to}</b>:
-                    ${response.data[i].text}</span>
-                </p>
-              </div>
-            </div>
-          `;
-          break;
-
-        case "private_message":
-          if (
-            response.data[i].from === nameUser ||
-            response.data[i].to === nameUser
-          )
-            divMessages.innerHTML += `
-              <div class="private-message">
-                <div class="display-message">
-                  <span class="time">(${response.data[i].time})</span>
-                    <span class="message">
-                        <b class="bold-text">${response.data[i].from}</b> reservadamente
-                        para <b class="bold-text">${response.data[i].to}</b>:
-                        ${response.data[i].text}
-                    </span>
-                </div>
-              </div>
-            `;
-          break;
-      }
-      scrollMessages();
+        }
+        break;
     }
   });
 }
@@ -118,25 +124,27 @@ function scrollMessages() {
 }
 
 function sendMessages() {
-  userMessage = document.querySelector(".initial-message").value;
-  console.log(userMessage);
+  let userMessage = document.querySelector(".send-message-input").value;
 
-  let promise = axios.post(
-    "https://mock-api.driven.com.br/api/v6/uol/messages",
-    { from: nameUser, to: "Todos", text: userMessage, type: "message" }
-  );
+  let promise = axios.post(`${BASE_API_URL}/messages`, {
+    from: userName,
+    to: "Todos",
+    text: userMessage,
+    type: "message",
+  });
 
-  promise.then((response) => console.log(response.status));
+  promise.then((response) => {
+    scrollMessages();
+    console.log(response.status);
+  });
   promise.catch(() => window.location.reload());
 
   userMessage = "";
 }
 
 function sidebarOn() {
-  click = document.querySelector(".sidebar");
-  if (click !== null) {
-    click.classList.remove("hidden");
-  }
+  let click = document.querySelector(".sidebar");
+  if (!!click) click.classList.remove("hidden");
 }
 
 function sidebarOff() {
