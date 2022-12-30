@@ -13,6 +13,9 @@ function login() {
 
   let promise = axios.post(`${BASE_API_URL}/participants`, { name: userName });
 
+  document.querySelector(".login-container").classList.add("hidden");
+  document.querySelector(".loading-container").classList.remove("hidden");
+
   promise.then(logsTheUserIn);
   promise.catch(throwErrors);
 }
@@ -240,3 +243,13 @@ function showsTheRecipient() {
     <div class="send-message-to">Enviando para ${recipient} (${visability})</div>
   `;
 }
+
+function addKeyDownEvents() {
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      sendMessages();
+    }
+  });
+}
+
+addKeyDownEvents();

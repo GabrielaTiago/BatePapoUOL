@@ -61,7 +61,8 @@ input:focus::-webkit-input-placeholder {
   width: 130px;
   height: 92px;
 }
-.login-container {
+.login-container,
+.loading-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -91,6 +92,13 @@ input:focus::-webkit-input-placeholder {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+.loading-img {
+  width: 75px;
+}
+.loading-text {
+  font-weight: 500;
+  font-size: 14px;
 }
 .container-messages {
   width: 100%;
@@ -127,7 +135,6 @@ input:focus::-webkit-input-placeholder {
 .bold-text {
   font-weight: 700;
 }
-
 .sidebar {
   width: 100vw;
   height: 100vh;
