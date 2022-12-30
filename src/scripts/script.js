@@ -243,3 +243,13 @@ function showsTheRecipient() {
     <div class="send-message-to">Enviando para ${recipient} (${visability})</div>
   `;
 }
+
+function addKeyDownEvents() {
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      sendMessages();
+    }
+  });
+}
+
+addKeyDownEvents();
