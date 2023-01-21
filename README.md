@@ -38,7 +38,7 @@ O usuário poderá fazer o login e desfrutar do chat juntamente com os demais, e
 <div>
     <img src="src/assets/images/screen/mobile-login.jpg" alt="viewing the app on a small screen">
     <img src="src/assets/images/screen/mobile-msg.jpg" alt="viewing the app on a small screen">
-    <img src="src/assets/images/screen/mobile-participants.jgp" alt="viewing the app on a small screen">
+    <img src="src/assets/images/screen/mobile-participants.jpg" alt="viewing the app on a small screen">
 </div>
 
 $~$
