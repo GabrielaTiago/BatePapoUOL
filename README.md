@@ -25,18 +25,21 @@ O usuário poderá fazer o login e desfrutar do chat juntamente com os demais, e
 
 ### :computer: Telas
 
-<p align="center">
-    <h5>Desktop:</h5>
-    <img src="src/assets/images/screen/large.png" alt="viewing the app on a large screen">
-    <h5>Tablet:</h5>
-    <img src="src/assets/images/screen/medium.png" alt="viewing the app on a medium screen">
-    <h5>Mobile:</h5>
-    <div>
-        <img src="src/assets/images/screen/mobile-login.png" alt="viewing the app on a small screen">
-        <img src="src/assets/images/screen/mobile-msg.png" alt="viewing the app on a small screen">
-        <img src="src/assets/images/screen/mobile-participants.png" alt="viewing the app on a small screen">
-    </div>
-</p>
+##### Desktop:
+
+<img src="src/assets/images/screen/large.jpg" alt="viewing the app on a large screen">
+
+##### Tablet:
+
+<img src="src/assets/images/screen/medium.jpg" alt="viewing the app on a medium screen">
+
+##### Mobile:
+
+<div>
+    <img src="src/assets/images/screen/mobile-login.jpg" alt="viewing the app on a small screen">
+    <img src="src/assets/images/screen/mobile-msg.jpg" alt="viewing the app on a small screen">
+    <img src="src/assets/images/screen/mobile-participants.jgp" alt="viewing the app on a small screen">
+</div>
 
 $~$
 
@@ -66,7 +69,7 @@ $~$
 
 - [Badges para Github](https://github.com/alexandresanlim/Badges4-README.md-Profile#-database-)
 - [README Inspiração de README](https://gist.github.com/luanalessa/7f98467a5ed62d00dcbde67d4556a1e4#file-readme-md)
-- [Diven Education](https://www.driven.com.br)
+- [Driven Education](https://www.driven.com.br)
 
 ---
 
